@@ -1,0 +1,441 @@
+{
+  "donnees": {
+    "n_trajets": 21105,
+    "n_vehicules": 287,
+    "n_colonnes": 23,
+    "pct_temp_manquante": 51.32906894100924,
+    "n_ice": 12858,
+    "n_hev": 8247,
+    "conso_moy": 8.371740857409687
+  },
+  "regression": {
+    "n_train": 1740,
+    "n_test": 435,
+    "comparaison": [
+      {
+        "modèle": "Baseline : moyenne (Dummy)",
+        "MAE train": 1.986,
+        "MAE CV": 2.018,
+        "écart-type": 0.1,
+        "R² CV": -0.055
+      },
+      {
+        "modèle": "Règle actuelle : moyenne par véhicule",
+        "MAE train": 1.088,
+        "MAE CV": 1.157,
+        "écart-type": 0.115,
+        "R² CV": 0.678
+      },
+      {
+        "modèle": "Régression linéaire (Ridge)",
+        "MAE train": 0.673,
+        "MAE CV": 0.753,
+        "écart-type": 0.115,
+        "R² CV": 0.849
+      },
+      {
+        "modèle": "Arbre sans max_depth",
+        "MAE train": -0.0,
+        "MAE CV": 0.864,
+        "écart-type": 0.168,
+        "R² CV": 0.781
+      },
+      {
+        "modèle": "Random Forest",
+        "MAE train": 0.341,
+        "MAE CV": 0.663,
+        "écart-type": 0.18,
+        "R² CV": 0.875
+      },
+      {
+        "modèle": "Gradient Boosting",
+        "MAE train": 0.173,
+        "MAE CV": 0.674,
+        "écart-type": 0.198,
+        "R² CV": 0.863
+      }
+    ],
+    "modele_retenu": "Random Forest réglée",
+    "params_rf": {
+      "model__max_depth": null,
+      "model__min_samples_leaf": 1
+    },
+    "mae_rf_reglee": 0.6524058826066019,
+    "test_modele": {
+      "MAE": 0.7198536017846081,
+      "RMSE": 1.0257571016469096,
+      "R2": 0.8685323905123709
+    },
+    "test_regle": {
+      "MAE": 1.2692593642744088,
+      "RMSE": 1.7250815370142707,
+      "R2": 0.6281661225187614
+    },
+    "test_dummy": {
+      "MAE": 2.1888969653062746,
+      "RMSE": 2.8898515236173155,
+      "R2": -0.04347190674001333
+    },
+    "pct_moins_10": 0.6160919540229886,
+    "top_variables": {
+      "type_vehicule": 0.751,
+      "poids_kg": 0.424,
+      "cylindree_l": 0.207,
+      "rpm_moy": 0.191,
+      "temp_ext": 0.156
+    },
+    "analyse": [
+      {
+        "type_vehicule": "HEV",
+        "contexte": "ville/mixte",
+        "size": 65,
+        "mean": 0.35
+      },
+      {
+        "type_vehicule": "HEV",
+        "contexte": "mixte autoroute",
+        "size": 5,
+        "mean": 0.35
+      },
+      {
+        "type_vehicule": "HEV",
+        "contexte": "autoroute",
+        "size": 14,
+        "mean": 0.31
+      },
+      {
+        "type_vehicule": "ICE",
+        "contexte": "ville/mixte",
+        "size": 266,
+        "mean": 0.76
+      },
+      {
+        "type_vehicule": "ICE",
+        "contexte": "mixte autoroute",
+        "size": 9,
+        "mean": 1.02
+      },
+      {
+        "type_vehicule": "ICE",
+        "contexte": "autoroute",
+        "size": 76,
+        "mean": 0.96
+      }
+    ]
+  },
+  "decision": {
+    "hyp": {
+      "flotte_vehicules": 100,
+      "km_par_an": 20000,
+      "prix_carburant": 1.8,
+      "trajets_par_vehicule_an": 440,
+      "taille_bloc": 10,
+      "anomalies_par_an": 12,
+      "cout_fausse_alerte": 15,
+      "cout_vraie_alerte": 90,
+      "cout_anomalie_ratee": 400,
+      "abonnement_mois": 4,
+      "integration": 3000,
+      "cout_coaching": 120,
+      "part_a_coacher": 0.25,
+      "turnover": 0.2,
+      "capture_coaching": 0.5,
+      "capture_appli": 0.2
+    },
+    "seuil_train": 0.15,
+    "n_blocs_train": 146,
+    "styles": [
+      {
+        "contexte": "autoroute",
+        "calme": 8.1799,
+        "normal": 8.7955,
+        "nerveux": 9.7002,
+        "écart nerveux / calme": 0.1859
+      },
+      {
+        "contexte": "mixte",
+        "calme": 6.7404,
+        "normal": 6.6917,
+        "nerveux": 7.613,
+        "écart nerveux / calme": 0.1294
+      },
+      {
+        "contexte": "ville",
+        "calme": 7.1396,
+        "normal": 7.7698,
+        "nerveux": 8.8149,
+        "écart nerveux / calme": 0.2347
+      }
+    ],
+    "n_blocs_test": 43,
+    "n_simulations": 30,
+    "tableau_modele": [
+      {
+        "seuil": 0.05,
+        "TP": 4.2667,
+        "FP": 14.4,
+        "FN": 0.0,
+        "n_normaux": 38.7333,
+        "precision": 0.2286,
+        "recall": 1.0,
+        "FP/an": 1636.0,
+        "TP/an": 12.0,
+        "coût annuel (€)": 25620.0
+      },
+      {
+        "seuil": 0.1,
+        "TP": 4.1667,
+        "FP": 5.4333,
+        "FN": 0.1,
+        "n_normaux": 38.7333,
+        "precision": 0.434,
+        "recall": 0.9766,
+        "FP/an": 617.0,
+        "TP/an": 11.7,
+        "coût annuel (€)": 10428.0
+      },
+      {
+        "seuil": 0.15,
+        "TP": 4.1,
+        "FP": 2.6667,
+        "FN": 0.1667,
+        "n_normaux": 38.7333,
+        "precision": 0.6059,
+        "recall": 0.9609,
+        "FP/an": 303.0,
+        "TP/an": 11.5,
+        "coût annuel (€)": 5780.0
+      },
+      {
+        "seuil": 0.2,
+        "TP": 3.8333,
+        "FP": 1.7333,
+        "FN": 0.4333,
+        "n_normaux": 38.7333,
+        "precision": 0.6886,
+        "recall": 0.8984,
+        "FP/an": 197.0,
+        "TP/an": 10.8,
+        "coût annuel (€)": 4407.0
+      },
+      {
+        "seuil": 0.25,
+        "TP": 3.3333,
+        "FP": 0.0,
+        "FN": 0.9333,
+        "n_normaux": 38.7333,
+        "precision": 1.0,
+        "recall": 0.7812,
+        "FP/an": 0.0,
+        "TP/an": 9.4,
+        "coût annuel (€)": 1886.0
+      },
+      {
+        "seuil": 0.3,
+        "TP": 2.8,
+        "FP": 0.0,
+        "FN": 1.4667,
+        "n_normaux": 38.7333,
+        "precision": 1.0,
+        "recall": 0.6562,
+        "FP/an": 0.0,
+        "TP/an": 7.9,
+        "coût annuel (€)": 2351.0
+      },
+      {
+        "seuil": 0.4,
+        "TP": 0.9667,
+        "FP": 0.0,
+        "FN": 3.3,
+        "n_normaux": 38.7333,
+        "precision": 1.0,
+        "recall": 0.2266,
+        "FP/an": 0.0,
+        "TP/an": 2.7,
+        "coût annuel (€)": 3963.0
+      }
+    ],
+    "tableau_regle": [
+      {
+        "seuil": 0.05,
+        "TP": 4.2,
+        "FP": 24.4667,
+        "FN": 0.0667,
+        "n_normaux": 38.7333,
+        "precision": 0.1465,
+        "recall": 0.9844,
+        "FP/an": 2779.0,
+        "TP/an": 11.8,
+        "coût annuel (€)": 42827.0
+      },
+      {
+        "seuil": 0.1,
+        "TP": 4.0667,
+        "FP": 22.6667,
+        "FN": 0.2,
+        "n_normaux": 38.7333,
+        "precision": 0.1521,
+        "recall": 0.9531,
+        "FP/an": 2575.0,
+        "TP/an": 11.4,
+        "coût annuel (€)": 39891.0
+      },
+      {
+        "seuil": 0.15,
+        "TP": 3.9,
+        "FP": 18.2333,
+        "FN": 0.3667,
+        "n_normaux": 38.7333,
+        "precision": 0.1762,
+        "recall": 0.9141,
+        "FP/an": 2071.0,
+        "TP/an": 11.0,
+        "coût annuel (€)": 32455.0
+      },
+      {
+        "seuil": 0.2,
+        "TP": 3.7,
+        "FP": 11.8333,
+        "FN": 0.5667,
+        "n_normaux": 38.7333,
+        "precision": 0.2382,
+        "recall": 0.8672,
+        "FP/an": 1344.0,
+        "TP/an": 10.4,
+        "coût annuel (€)": 21736.0
+      },
+      {
+        "seuil": 0.25,
+        "TP": 3.3,
+        "FP": 10.9667,
+        "FN": 0.9667,
+        "n_normaux": 38.7333,
+        "precision": 0.2313,
+        "recall": 0.7734,
+        "FP/an": 1246.0,
+        "TP/an": 9.3,
+        "coût annuel (€)": 20607.0
+      },
+      {
+        "seuil": 0.3,
+        "TP": 3.1667,
+        "FP": 4.6,
+        "FN": 1.1,
+        "n_normaux": 38.7333,
+        "precision": 0.4077,
+        "recall": 0.7422,
+        "FP/an": 523.0,
+        "TP/an": 8.9,
+        "coût annuel (€)": 9886.0
+      },
+      {
+        "seuil": 0.4,
+        "TP": 2.6,
+        "FP": 1.8,
+        "FN": 1.6667,
+        "n_normaux": 38.7333,
+        "precision": 0.5909,
+        "recall": 0.6094,
+        "FP/an": 204.0,
+        "TP/an": 7.3,
+        "coût annuel (€)": 5597.0
+      }
+    ],
+    "seuil": 0.15,
+    "recall": 0.9609374999999999,
+    "precision": 0.6059113300492611,
+    "fp_an": 303.0,
+    "cout_modele": 5780.0,
+    "cout_regle": 32455.0,
+    "cout_sans": 4800.0,
+    "pot_coach": 0.14946685837952042,
+    "pot_autres": 0.04450176000020532,
+    "conso_ice": 7.777831642811953,
+    "roi": [
+      {
+        "scenario": "Pessimiste (coaching 25 %, appli 5 %)",
+        "litres économisés": 1713.0,
+        "gain carburant (€)": 3083.0,
+        "gain anomalies (€)": -3958.0,
+        "gain annuel (€)": -875.0,
+        "coût an 1 (€)": 10800.0,
+        "ROI an 1 (%)": -108.1,
+        "retour (mois)": null,
+        "ROI 3 ans (%)": -112.1,
+        "conducteurs coachés": 25.0
+      },
+      {
+        "scenario": "Central (coaching 50 %, appli 20 %)",
+        "litres économisés": 3945.0,
+        "gain carburant (€)": 7100.0,
+        "gain anomalies (€)": -970.0,
+        "gain annuel (€)": 6130.0,
+        "coût an 1 (€)": 10800.0,
+        "ROI an 1 (%)": -43.2,
+        "retour (mois)": 21.1,
+        "ROI 3 ans (%)": -14.9,
+        "conducteurs coachés": 25.0
+      },
+      {
+        "scenario": "Optimiste (coaching 70 %, appli 30 %)",
+        "litres économisés": 5626.0,
+        "gain carburant (€)": 10128.0,
+        "gain anomalies (€)": -970.0,
+        "gain annuel (€)": 9157.0,
+        "coût an 1 (€)": 10800.0,
+        "ROI an 1 (%)": -15.2,
+        "retour (mois)": 14.2,
+        "ROI 3 ans (%)": 27.2,
+        "conducteurs coachés": 25.0
+      },
+      {
+        "scenario": "Central, carburant à 1,60 €/L",
+        "litres économisés": 3945.0,
+        "gain carburant (€)": 6312.0,
+        "gain anomalies (€)": -970.0,
+        "gain annuel (€)": 5341.0,
+        "coût an 1 (€)": 10800.0,
+        "ROI an 1 (%)": -50.5,
+        "retour (mois)": 24.3,
+        "ROI 3 ans (%)": -25.8,
+        "conducteurs coachés": 25.0
+      },
+      {
+        "scenario": "Central, 12 000 km/an",
+        "litres économisés": 2367.0,
+        "gain carburant (€)": 4260.0,
+        "gain anomalies (€)": -970.0,
+        "gain annuel (€)": 3290.0,
+        "coût an 1 (€)": 10800.0,
+        "ROI an 1 (%)": -69.5,
+        "retour (mois)": 39.4,
+        "ROI 3 ans (%)": -54.3,
+        "conducteurs coachés": 25.0
+      },
+      {
+        "scenario": "Central, 30 000 km/an",
+        "litres économisés": 5917.0,
+        "gain carburant (€)": 10651.0,
+        "gain anomalies (€)": -970.0,
+        "gain annuel (€)": 9680.0,
+        "coût an 1 (€)": 10800.0,
+        "ROI an 1 (%)": -10.4,
+        "retour (mois)": 13.4,
+        "ROI 3 ans (%)": 34.4,
+        "conducteurs coachés": 25.0
+      },
+      {
+        "scenario": "Central, abonnement 6 €/mois",
+        "litres économisés": 3945.0,
+        "gain carburant (€)": 7100.0,
+        "gain anomalies (€)": -970.0,
+        "gain annuel (€)": 6130.0,
+        "coût an 1 (€)": 13200.0,
+        "ROI an 1 (%)": -53.6,
+        "retour (mois)": 25.8,
+        "ROI 3 ans (%)": -36.1,
+        "conducteurs coachés": 25.0
+      }
+    ]
+  }
+}
