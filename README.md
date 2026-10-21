@@ -6,7 +6,6 @@
 EcoDrive prédit la consommation normale d'un trajet afin de repérer les surconsommations et de comparer les styles de conduite. Le cas d'usage retenu est une flotte professionnelle.
 
 ## Résultats principaux
-> IMPORTANT : si le projet tourne encore sur les données de démonstration, remplacer cette version par les résultats VED réels avant le rendu final.
 
 - MAE du modèle sur le test : **0,72 L/100 km**
 - MAE de la règle actuelle : **1,27 L/100 km**
