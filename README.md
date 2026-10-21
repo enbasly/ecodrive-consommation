@@ -1,6 +1,6 @@
 # EcoDrive — prédire la consommation de carburant d'une flotte
 
-Équipe : Enzo BASLY, Guillaume, Rayan
+Équipe : Enzo, Guillaume, Rayan
 
 ## Objectif
 EcoDrive prédit la consommation normale d'un trajet afin de repérer les surconsommations et de comparer les styles de conduite. Le cas d'usage retenu est une flotte professionnelle.
